@@ -4,7 +4,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const folder = "D:/IT/RS School/HTML-Builder/03-files-in-folder/secret-folder";
+const folder = "./03-files-in-folder/secret-folder";
 
 fs.readdir(folder, (_, files) => {
   files.forEach(file => {
