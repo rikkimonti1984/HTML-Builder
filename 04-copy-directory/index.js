@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 
-const folder = "D:/IT/RS School/HTML-Builder/04-copy-directory/files";
-const destination = "D:/IT/RS School/HTML-Builder/04-copy-directory/files-copy";
+const folder = "./04-copy-directory/files";
+const destination = "./04-copy-directory/files-copy";
 
 function copyDir(src, dest) {
   fs.mkdir(dest, { recursive: true }, (err) => {
