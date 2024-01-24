@@ -5,5 +5,8 @@
  */
 
 const fs = require("fs");
-const readableStream = fs.createReadStream("D:/IT/RS School/HTML-Builder/01-read-file/text.txt");
+const path = require("path");
+const relativePath = "./01-read-file/text.txt";
+const absolutePath = path.resolve(relativePath);
+const readableStream = fs.createReadStream(absolutePath);
 readableStream.on("data", (chunk) => console.log(chunk.toString()));
