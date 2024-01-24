@@ -7,7 +7,10 @@
  */
 const fs = require("fs");
 const readline = require('readline');
-const output  = fs.createWriteStream("D:/IT/RS School/HTML-Builder/02-write-file/text.txt");
+const path = require("path");
+const relativePath = "./02-write-file/text.txt";
+const absolutePath = path.resolve(relativePath);
+const output  = fs.createWriteStream(absolutePath);
 const {stdout } = process;
 
 stdout.write("Message in uppercase: ");
