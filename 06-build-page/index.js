@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 
-const folder = "D:/IT/RS School/HTML-Builder/06-build-page/styles";
-const destination = "D:/IT/RS School/HTML-Builder/06-build-page/project-dist";
+const folder = "./06-build-page/styles";
+const destination = "./06-build-page/project-dist";
 const outputFile = path.join(destination, "bundle.css");
 
 fs.readdir(folder, (_, files) => {
