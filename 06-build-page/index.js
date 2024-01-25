@@ -23,6 +23,7 @@ const templatePath = './06-build-page/template.html';
 const componentsPath = './06-build-page/components';
 const assetsPath = './06-build-page/assets';
 fs.readFile(templatePath, 'utf8', (_, template) => {
+  template = template.replace('</head>', '<link rel="stylesheet" type="text/css" href="bundle.css">\n</head>');
   fs.readdir(componentsPath, (_, components) => {
     for (let component of components) {
       let tag = path.basename(component, '.html');
@@ -38,13 +39,24 @@ fs.readFile(templatePath, 'utf8', (_, template) => {
 
 //для assets
 const assetsDestination = path.join(destination, 'assets');
-fs.mkdir(assetsDestination, { recursive: true }, (_) => {
-  fs.readdir(assetsPath, (_, files) => {
-    files.forEach(file => {
-      let srcPath = path.join(assetsPath, file);
-      let destPath = path.join(assetsDestination, file);
-
-      fs.copyFile(srcPath, destPath, (_) => {});
+function copyDir(src, dest) {
+  fs.mkdir(dest, { recursive: true }, (err) => {
+    if (err) return;
+    fs.readdir(src, (err, files) => {
+      if (err) return;
+      files.forEach(file => {
+        const srcPath = path.join(src, file);
+        const destPath = path.join(dest, file);
+        fs.stat(srcPath, (err, stats) => {
+          if (err) return;
+          if (stats.isDirectory()) {
+            copyDir(srcPath, destPath);
+          } else {
+            fs.copyFile(srcPath, destPath, (_) => {});
+          }
+        });
+      });
     });
   });
-});
+}
+copyDir(assetsPath, assetsDestination);
